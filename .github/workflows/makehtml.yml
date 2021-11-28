@@ -14,17 +14,4 @@ jobs:
     username: ineomail
     password: $DOCKERHUB_PASSWORD
   
-    steps:
-        - checkout
-      
-  - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
-          push: true
-          build-args: |
-            app_version=${{ env.VERSION }}
-            release_date=${{ env.RELEASE_DATE }}
- 
+
