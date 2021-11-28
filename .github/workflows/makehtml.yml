@@ -4,27 +4,27 @@ name: CI
 
 version: 2.0
 
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-   docker: 
-   - image: ubuntu:latest
+  run:
+    name: Build and publish docker images
+    runs-on: ubuntu-latest
+    steps:
+    
    auth:
     username: ineomail
     password: $DOCKERHUB_PASSWORD
   
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - checkout
       
-
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
+  - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            app_version=${{ env.VERSION }}
+            release_date=${{ env.RELEASE_DATE }}
  
