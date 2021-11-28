@@ -1,17 +1,7 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-version: 2.0
-
+name: actions-test
+on: [push]
 jobs:
-  run:
-    name: Build and publish docker images
+  print-hello:
     runs-on: ubuntu-latest
     steps:
-    
-   auth:
-    username: ineomail
-    password: $DOCKERHUB_PASSWORD
-  
-
+      - run: echo "Hello, world"
